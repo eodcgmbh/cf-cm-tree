@@ -41,9 +41,9 @@ def validate_long_name(arg: str | None) -> str:
     """Validate a CF long name.
 
     Returns arg unchanged if it is None or holds only letters, digits,
-    whitespace, and `(),`; raises ValueError otherwise.
+    whitespace, and `(),.-`; raises ValueError otherwise.
     """
-    pattern = re.compile(r"^[a-zA-Z_0-9][a-zA-Z_0-9\s(),]+$")
+    pattern = re.compile(r"^[a-zA-Z_0-9][a-zA-Z_0-9\s(),.\-]+$")
 
     if arg and not pattern.match(arg):
         err_msg = f"Long name '{arg}' does not comply with the CF naming convention."
