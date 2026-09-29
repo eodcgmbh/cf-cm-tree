@@ -42,9 +42,21 @@ def test_cf_base():
 
     with pytest.raises(
         ValidationError,
-        match=r"Long name 'bad-name' does not comply with the CF naming convention.",
+        match=r"Long name 'bad/name' does not comply with the CF naming convention.",
     ):
-        cf_base = CFBase(name="var", standard_name="var_name", long_name="bad-name")
+        cf_base = CFBase(name="var", standard_name="var_name", long_name="bad/name")
+
+    cf_base = CFBase(name="var", standard_name="var_name", long_name="Temp. at 2 m")
+    assert cf_base.long_name == "Temp. at 2 m"
+
+    cf_base = CFBase(name="var", standard_name="var_name", long_name="near-surface air")
+    assert cf_base.long_name == "near-surface air"
+
+    with pytest.raises(
+        ValidationError,
+        match=r"Long name '.hidden' does not comply with the CF naming convention.",
+    ):
+        cf_base = CFBase(name="var", standard_name="var_name", long_name=".hidden")
 
 
 def test_cf_coordinate():
