@@ -22,7 +22,7 @@ pip install cf-cm-tree
 _cf-cm-tree_ contains all user-facing classes at its root and a `utils` module, which collects some useful helper functions.
 
 ### Coordinates
-In terms of multi-dimensional dataset hierarchy, the `CFCoordinate` class is at the lowest level. It defines some mandatory attributes like `name` and `standard_name`, and optional attributes like `long_name` or `units`. Certain attribute values are validated during class initialisation to ensure that they are CF compliant, e.g., `axis` always needs to have a single uppercase letter.
+In terms of multi-dimensional dataset hierarchy, the `CFCoordinate` class is at the lowest level. It requires `name` plus a `standard_name` or a `long_name` (at least one), and takes optional attributes like `units`. `standard_name` must come from the CF standard name table; leave it out when no entry fits (CF 1.11 section 3). Certain attribute values are validated during class initialisation to ensure that they are CF compliant, e.g., `axis` always needs to have a single uppercase letter.
 
 
 ```python
