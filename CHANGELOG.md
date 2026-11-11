@@ -6,7 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
-## Unreleased
+## [v1.2.0](https://github.com/eodcgmbh/eodc-cf/releases/tag/v1.1.0) - 2026-11-11
+
+<small>[Compare with 1.1.0](https://github.com/eodcgmbh/eodc-cf/compare/1.1.0...v1.2.0)</small>
 
 ### Summary
 
