@@ -297,3 +297,16 @@ def test_combine_cf_ds():
 
 if __name__ == "__main__":
     pass
+
+
+def test_standard_name_is_optional_with_long_name():
+    cf_coord = CFCoordinate(name="orbit", long_name="relative orbit number")
+    assert "standard_name" not in cf_coord.attrs
+    cf_var = CFDataVariable(name="evi", long_name="Enhanced Vegetation Index")
+    assert "standard_name" not in cf_var.attrs
+
+
+@pytest.mark.parametrize("long_name", [None, ""])
+def test_needs_standard_name_or_long_name(long_name: str | None):
+    with pytest.raises(ValueError, match="needs a standard_name or a long_name"):
+        CFDataVariable(name="evi", long_name=long_name)
