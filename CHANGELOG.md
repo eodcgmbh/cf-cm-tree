@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 <!-- insertion marker -->
+## [v1.2.0](https://github.com/eodcgmbh/eodc-cf/releases/tag/v1.1.0) - 2026-11-11
+
+<small>[Compare with 1.1.0](https://github.com/eodcgmbh/eodc-cf/compare/1.1.0...v1.2.0)</small>
+
+### Summary
+
+- standard_name optional (CF 1.11 section 3): omit it when the standard name table has no entry
+- every variable/coordinate needs a standard_name or a long_name
+
 ## [v1.1.0](https://github.com/eodcgmbh/eodc-cf/releases/tag/v1.0.0) - 2026-09-29
 
 <small>[Compare with 1.0.0](https://github.com/eodcgmbh/eodc-cf/compare/1.0.0...v1.1.0)</small>

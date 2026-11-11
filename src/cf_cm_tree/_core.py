@@ -4,7 +4,7 @@ import copy
 import re
 from typing import Annotated, Any, Union
 
-from pydantic import AfterValidator, BaseModel
+from pydantic import AfterValidator, BaseModel, model_validator
 
 
 def validate_variable_name(arg: str) -> str:
@@ -81,11 +81,22 @@ def validate_attributes(arg: dict | None) -> dict:
 
 
 class CFBase(BaseModel):
-    """Shared base model providing name, standard_name, and optional long_name."""
+    """Shared base model: name, plus standard_name and/or long_name.
+
+    Both are optional in CF (1.11 section 3), but at least one is required here.
+    standard_name must come from the CF standard name table: omit it when none fits.
+    """
 
     name: Annotated[str, AfterValidator(validate_variable_name)]
-    standard_name: Annotated[str, AfterValidator(validate_variable_name)]
+    standard_name: Annotated[str, AfterValidator(validate_variable_name)] | None = None
     long_name: Annotated[str, AfterValidator(validate_long_name)] | None = None
+
+    @model_validator(mode="after")
+    def _described(self) -> "CFBase":
+        if self.standard_name is None and not self.long_name:
+            err_msg = f"'{self.name}' needs a standard_name or a long_name."
+            raise ValueError(err_msg)
+        return self
 
 
 class CFCoordinate(CFBase):
